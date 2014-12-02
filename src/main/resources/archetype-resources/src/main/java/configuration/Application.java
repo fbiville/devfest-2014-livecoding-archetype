@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 package ${package}.configuration;
 
-import ${package}.repository.WordsRepository;
+import ${package}.repository.CompaniesRepository;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +16,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @Configuration
-@EnableNeo4jRepositories(basePackageClasses = WordsRepository.class)
+@EnableNeo4jRepositories(basePackageClasses = CompaniesRepository.class)
 public class Application extends Neo4jConfiguration {
+
+    public Application() {
+        setBasePackage("${package}.model");
+    }
 
     @Bean
     public GraphDatabaseService graphDatabaseService() throws IOException {

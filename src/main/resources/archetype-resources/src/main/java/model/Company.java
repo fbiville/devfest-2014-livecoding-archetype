@@ -5,16 +5,13 @@ package ${package}.model;
 
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
-import org.springframework.data.neo4j.annotation.Labels;
 import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.support.index.IndexType;
 
 @NodeEntity
-@Labels(defaultValue = "word")
-public class Word {
+public class Company {
 
     private Long id;
-    private String text;
+    private String name;
 
     @GraphId
     public Long getId() {
@@ -25,12 +22,12 @@ public class Word {
         this.id = id;
     }
 
-    @Indexed(indexType = IndexType.FULLTEXT, indexName = "wordContents")
-    public String getText() {
-        return text;
+    @Indexed(unique = true)
+    public String getName() {
+        return name;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setName(String name) {
+        this.name = name;
     }
 }
